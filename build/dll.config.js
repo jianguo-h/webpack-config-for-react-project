@@ -37,18 +37,20 @@ const dllConfig = {
           drop_console: true,
           drop_debugger: true
         }
-      },
+      }
     })
   ]
 };
 
 webpack(dllConfig, (errout, stats) => {
-  if(errout) throw errout;
-  process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false
-  }) + '\n\n');
+  if (errout) throw errout;
+  process.stdout.write(
+    stats.toString({
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false
+    }) + '\n\n'
+  );
 });
