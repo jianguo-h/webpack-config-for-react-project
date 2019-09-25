@@ -6,10 +6,10 @@
 
 ```
 .
-├── webpack                                     // webpack配置文件
+├── build                                       // webpack配置文件
 ├── config                                      // 其它一些配置
 ├── dist                                        // 打包后的目录
-├── app                                         // 源码
+├── src                                         // 源码
 │   ├── api                                     // 接口管理
 │   ├── components                              // 组件
 │   ├── styles                                  // 全局样式
