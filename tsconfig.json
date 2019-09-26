@@ -4,11 +4,12 @@
     "allowJs": true,
     "target": "es5",
     "strict": true,
-    "module": "commonjs",
+    "module": "esnext",
     "sourceMap": true,
     "noImplicitAny": true,
     "jsx": "preserve",
     "baseUrl": "./",
+    "esModuleInterop": true,
     "paths": {
       "@src/*": ["src/*"]
     }
