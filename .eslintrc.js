@@ -4,9 +4,14 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'prettier',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
-    // 'prettier/react'
+    'prettier/react'
+  ],
+  plugins: [
+    'react',
+    'react-hooks'
   ],
   parserOptions: {
     sourceType: 'module',
@@ -17,7 +22,8 @@ module.exports = {
   },
   env: {
     browser: true,
-    es6: true
+    es6: true,
+    node: true
   },
   settings: {
     react: {
@@ -25,10 +31,6 @@ module.exports = {
       version: 'detect'
     }
   },
-  plugins: [
-    'react',
-    // 'react-hooks'
-  ],
   'rules': {
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': ['error', {
@@ -37,6 +39,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-inferrable-types': ['error', {
       ignoreParameters: true
-    }]
+    }],
+    'react/prop-types': 'off'
   }
-}
+};
