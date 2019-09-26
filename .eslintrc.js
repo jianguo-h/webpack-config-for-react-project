@@ -33,13 +33,18 @@ module.exports = {
   },
   'rules': {
     '@typescript-eslint/no-var-requires': 'warn',
-    '@typescript-eslint/explicit-function-return-type': ['error', {
-      allowExpressions: true
-    }],
+    '@typescript-eslint/explicit-function-return-type': 'warn',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-inferrable-types': ['error', {
       ignoreParameters: true
-    }],
-    'react/prop-types': 'off'
-  }
+    }]
+  },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        'react/prop-types': 'off'
+      }
+    }
+  ]
 };
