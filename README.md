@@ -1,6 +1,6 @@
 # webpack-config-for-react-project
 
-> 为react项目开发而搭建的一套webpack基础配置，在此配置上进行扩展
+> 为`react`项目开发而搭建的一套`webpack`基础配置，在此配置上进行扩展，支持 ts，推荐使用 vs code 编辑器
 
 ## 目录按如下结构
 
