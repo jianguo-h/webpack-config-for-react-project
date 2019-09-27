@@ -1,10 +1,11 @@
-const Koa = require('koa');
+const express = require('express');
 const webpack = require('webpack');
 const config = require('../config');
 const webpackDevConfig = require('./dev.config');
-const { devMiddleware, hotMiddleware } = require('koa-webpack-middleware');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const app = new Koa();
+const app = express();
 const devPort = config.dev.port;
 const url = 'http://localhost:' + devPort;
 const compiler = webpack(webpackDevConfig);
@@ -14,10 +15,18 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'development';
 }
 
-const devMiddlewareInstance = devMiddleware(compiler, {
+const devMiddlewareInstance = webpackDevMiddleware(compiler, {
   stats: { colors: true }
 });
-const hotMiddlewareInstance = hotMiddleware(compiler);
+const hotMiddlewareInstance = webpackHotMiddleware(compiler);
+
+compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
+  compilation.hooks.htmlWebpackPluginAfterEmit.tap('HtmlWebpackPlugin', () => {
+    webpackHotMiddlewareInstance.publish({
+      action: 'reload'
+    });
+  });
+});
 
 // use middleware
 app.use(devMiddlewareInstance);
