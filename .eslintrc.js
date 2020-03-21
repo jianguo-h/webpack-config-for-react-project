@@ -31,9 +31,9 @@ module.exports = {
       version: 'detect'
     }
   },
-  'rules': {
+  rules: {
     '@typescript-eslint/no-var-requires': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-inferrable-types': ['error', {
       ignoreParameters: true
