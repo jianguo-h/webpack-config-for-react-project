@@ -1,7 +1,6 @@
 module.exports = {
-  'src/**/*.{js?(x), ts?(x)}': [
+  'src/**/*.{js?(x),ts?(x)}': [
     'prettier --ignore-path .eslintignore --write',
-    'eslint --fix',
-    'git add'
+    'eslint --fix'
   ]
 };
