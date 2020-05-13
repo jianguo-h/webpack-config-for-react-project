@@ -4,9 +4,9 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "dev": "set NODE_ENV=development&&node build/dev-server.js",
-    "build": "set NODE_ENV=production&&node build/build.js",
-    "build-dll": "node build/dll.config.js"
+    "dev": "env-cmd node build/dev-server.js",
+    "build": "env-cmd -f .env.production node build/build.js",
+    "build-dll": "env-cmd -f .env.production node build/dll.config.js"
   },
   "repository": {
     "type": "git",

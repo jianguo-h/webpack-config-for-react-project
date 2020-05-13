@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
@@ -62,8 +63,8 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
       uglifyOptions: {
         warnings: false, // 删除警告
         compress: {
-          drop_console: true, // 去除日志
-          drop_debugger: true // 去除debugger
+          drop_console: true, // eslint-disable-line @typescript-eslint/camelcase
+          drop_debugger: true // eslint-disable-line @typescript-eslint/camelcase
         },
         output: {
           comments: false // 去除注释

@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const config = require('../config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -10,10 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     filename: 'static/js/[name].[hash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
-    publicPath:
-      process.env.NODE_ENV === 'production'
-        ? config.prod.publicPath
-        : config.dev.publicPath
+    publicPath: '/'
   },
   module: {
     rules: [

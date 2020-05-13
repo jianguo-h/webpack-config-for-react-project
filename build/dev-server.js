@@ -1,19 +1,14 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const express = require('express');
 const webpack = require('webpack');
-const config = require('../config');
 const webpackDevConfig = require('./dev.config');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const app = express();
-const devPort = config.dev.port;
+const devPort = process.env.PORT || 8080;
 const url = 'http://localhost:' + devPort;
 const compiler = webpack(webpackDevConfig);
-
-// 当环境变量不存在时设置为开发环境
-if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = 'development';
-}
 
 const devMiddlewareInstance = webpackDevMiddleware(compiler, {
   stats: { colors: true }
