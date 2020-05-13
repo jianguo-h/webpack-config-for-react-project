@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/no-var-requires */
 // 项目中的三方库放在这里统一打包，比如react全家桶, axios等ajax库, 以及一些ui库(如ant-design等)
 
 const path = require('path');
@@ -33,8 +33,8 @@ const dllConfig = {
           comments: false
         },
         compress: {
-          drop_console: true,
-          drop_debugger: true
+          drop_console: true, // eslint-disable-line @typescript-eslint/camelcase
+          drop_debugger: true // eslint-disable-line @typescript-eslint/camelcase
         }
       }
     })

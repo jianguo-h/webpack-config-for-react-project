@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack');
-const config = require('../config');
 const Jarvis = require('webpack-jarvis');
 const webpackMerge = require('webpack-merge');
 const webpackBaseConfig = require('./base.config');
@@ -17,9 +17,6 @@ Object.keys(webpackBaseConfig.entry).forEach(entryName => {
 const webpackDevConfig = webpackMerge(webpackBaseConfig, {
   devtool: 'cheap-module-eval-source-map',
   mode: 'development',
-  output: {
-    publicPath: config.dev.publicPath
-  },
   module: {
     rules: [
       {
