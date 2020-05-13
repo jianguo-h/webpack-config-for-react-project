@@ -9,10 +9,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'prettier/react'
   ],
-  plugins: [
-    'react',
-    'react-hooks'
-  ],
+  plugins: ['react', 'react-hooks'],
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2019,
@@ -35,9 +32,16 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/no-inferrable-types': ['error', {
-      ignoreParameters: true
-    }]
+    '@typescript-eslint/no-inferrable-types': [
+      'error',
+      {
+        ignoreParameters: true
+      }
+    ],
+    '@typescript-eslint/camelcase': [
+      'error',
+      { properties: 'never', ignoreDestructuring: true }
+    ]
   },
   overrides: [
     {

@@ -33,8 +33,8 @@ const dllConfig = {
           comments: false
         },
         compress: {
-          drop_console: true, // eslint-disable-line @typescript-eslint/camelcase
-          drop_debugger: true // eslint-disable-line @typescript-eslint/camelcase
+          drop_console: true,
+          drop_debugger: true
         }
       }
     })

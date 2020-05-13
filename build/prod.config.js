@@ -63,8 +63,8 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
       uglifyOptions: {
         warnings: false, // 删除警告
         compress: {
-          drop_console: true, // eslint-disable-line @typescript-eslint/camelcase
-          drop_debugger: true // eslint-disable-line @typescript-eslint/camelcase
+          drop_console: true,
+          drop_debugger: true
         },
         output: {
           comments: false // 去除注释
