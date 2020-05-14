@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import webpack from 'webpack';
 import webpackProdConfig from './prod.config';
-/* const webpack = require('webpack');
-const webpackProdConfig = require('./prod.config'); */
 
 console.log('building for production...\n');
 webpack(webpackProdConfig, (errout, stats) => {
@@ -13,7 +10,7 @@ webpack(webpackProdConfig, (errout, stats) => {
       modules: true,
       children: false,
       chunks: false,
-      chunkModules: false
+      chunkModules: false,
     }) + '\n\n'
   );
 
