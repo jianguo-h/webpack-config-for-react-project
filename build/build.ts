@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const webpack = require('webpack');
-const webpackProdConfig = require('./prod.config');
+import webpack from 'webpack';
+import webpackProdConfig from './prod.config';
+/* const webpack = require('webpack');
+const webpackProdConfig = require('./prod.config'); */
 
 console.log('building for production...\n');
 webpack(webpackProdConfig, (errout, stats) => {

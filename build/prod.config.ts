@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
-const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
-const webpackBaseConfig = require('./base.config');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+import path from 'path';
+import webpack, { Configuration } from 'webpack';
+import webpackMerge from 'webpack-merge';
+import webpackBaseConfig from './base.config';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
-const webpackProdConfig = webpackMerge(webpackBaseConfig, {
+const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   mode: 'production',
   devtool: false,
   module: {
@@ -76,4 +75,4 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
   ]
 });
 
-module.exports = webpackProdConfig;
+export default webpackProdConfig;
