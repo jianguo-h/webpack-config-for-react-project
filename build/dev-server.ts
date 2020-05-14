@@ -11,7 +11,7 @@ const compiler = webpack(webpackDevConfig);
 
 const devMiddlewareInstance = webpackDevMiddleware(compiler, {
   publicPath: webpackDevConfig.output?.publicPath ?? '/',
-  stats: { colors: true }
+  stats: { colors: true },
 });
 const hotMiddlewareInstance = webpackHotMiddleware(compiler);
 
