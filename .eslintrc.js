@@ -7,26 +7,26 @@ module.exports = {
     'prettier',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
-    'prettier/react'
+    'prettier/react',
   ],
   plugins: ['react', 'react-hooks'],
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2019,
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   env: {
     browser: true,
     es6: true,
-    node: true
+    node: true,
   },
   settings: {
     react: {
       pragma: 'React',
-      version: 'detect'
-    }
+      version: 'detect',
+    },
   },
   rules: {
     '@typescript-eslint/no-var-requires': 'warn',
@@ -35,20 +35,20 @@ module.exports = {
     '@typescript-eslint/no-inferrable-types': [
       'error',
       {
-        ignoreParameters: true
-      }
+        ignoreParameters: true,
+      },
     ],
     '@typescript-eslint/camelcase': [
       'error',
-      { properties: 'never', ignoreDestructuring: true }
-    ]
+      { properties: 'never', ignoreDestructuring: true },
+    ],
   },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        'react/prop-types': 'off'
-      }
-    }
-  ]
+        'react/prop-types': 'off',
+      },
+    },
+  ],
 };
