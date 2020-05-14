@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // 项目中的三方库放在这里统一打包，比如react全家桶, axios等ajax库, 以及一些ui库(如ant-design等)
 
-const path = require('path');
+import path from 'path';
+import webpack, { Configuration } from 'webpack';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+/* const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); */
 
 const libsPath = path.resolve(__dirname, '../app/libs');
-const dllConfig = {
+const dllConfig: Configuration = {
   mode: 'production',
   entry: {
     libs: ['react', 'react-dom']

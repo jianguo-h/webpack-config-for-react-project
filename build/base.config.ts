@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { Configuration } from 'webpack';
 
-module.exports = {
+const baseConfig: Configuration = {
   entry: {
     app: './src/index.tsx'
   },
@@ -80,3 +80,5 @@ module.exports = {
     }
   }
 };
+
+export default baseConfig;
