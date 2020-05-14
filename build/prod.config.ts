@@ -19,14 +19,14 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
           MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'less-loader'
-        ]
+          'less-loader',
+        ],
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'postcss-loader', 'less-loader']
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, 'postcss-loader', 'less-loader'],
+      },
+    ],
   },
   plugins: [
     // 每次打包前清除dist目录
@@ -34,28 +34,28 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
     // dllPlugin
     new webpack.DllReferencePlugin({
       context: __dirname,
-      manifest: require('../app/libs/libs-manifest.json')
+      manifest: require('../src/libs/libs-manifest.json'),
     }),
     // 将dllplugin生成的js自动注入到html中
     new AddAssetHtmlPlugin({
       publicPath: '/static/js/',
       filepath: path.resolve(__dirname, '../dll/*.js'),
-      outputPath: 'static/js'
+      outputPath: 'static/js',
     }),
     // 提取less和css
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[hash:8].css',
-      chunkFilename: 'static/css/[name].[chunkhash:8].css'
+      chunkFilename: 'static/css/[name].[chunkhash:8].css',
     }),
     // 压缩css
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessorOptions: {
         discardComments: {
-          removeAll: true
-        }
+          removeAll: true,
+        },
       },
-      canPrint: true
+      canPrint: true,
     }),
     // 压缩混淆js
     new UglifyJsPlugin({
@@ -63,16 +63,16 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
         warnings: false, // 删除警告
         compress: {
           drop_console: true,
-          drop_debugger: true
+          drop_debugger: true,
         },
         output: {
-          comments: false // 去除注释
-        }
+          comments: false, // 去除注释
+        },
       },
       cache: true, // 使用缓存
-      parallel: true // 开启多线程压缩
-    })
-  ]
+      parallel: true, // 开启多线程压缩
+    }),
+  ],
 });
 
 export default webpackProdConfig;
