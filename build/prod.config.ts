@@ -7,6 +7,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import { LIBS_PATH } from './constant';
 
 const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   mode: 'production',
@@ -34,12 +35,12 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
     // dllPlugin
     new webpack.DllReferencePlugin({
       context: __dirname,
-      manifest: require('../src/libs/libs-manifest.json'),
+      manifest: require(LIBS_PATH + '/libs-manifest.json'),
     }),
     // 将dllplugin生成的js自动注入到html中
     new AddAssetHtmlPlugin({
       publicPath: '/static/js/',
-      filepath: path.resolve(__dirname, '../dll/*.js'),
+      filepath: path.resolve(LIBS_PATH, '*.js'),
       outputPath: 'static/js',
     }),
     // 提取less和css

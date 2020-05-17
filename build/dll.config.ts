@@ -4,15 +4,15 @@ import path from 'path';
 import webpack, { Configuration } from 'webpack';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import { LIBS_PATH } from './constant';
 
-const libsPath = path.resolve(__dirname, '../src/libs');
 const dllConfig: Configuration = {
   mode: 'production',
   entry: {
     libs: ['react', 'react-dom'],
   },
   output: {
-    path: libsPath,
+    path: LIBS_PATH,
     filename: '[name].[hash:8].js',
     library: '[name]_library',
   },
@@ -21,7 +21,7 @@ const dllConfig: Configuration = {
     new webpack.DllPlugin({
       context: __dirname,
       name: '[name]_library',
-      path: path.resolve(libsPath, '[name]-manifest.json'),
+      path: path.resolve(LIBS_PATH, '[name]-manifest.json'),
     }),
     new UglifyJsPlugin({
       cache: true,
