@@ -17,6 +17,9 @@ Object.keys(webpackBaseConfig.entry as Entry).forEach(entryName => {
 const devConfig: Configuration = webpackMerge(webpackBaseConfig, {
   devtool: 'cheap-module-eval-source-map',
   mode: 'development',
+  output: {
+    filename: 'static/js/[name].[hash:8].js',
+  },
   module: {
     rules: [
       {

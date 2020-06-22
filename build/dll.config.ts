@@ -13,7 +13,7 @@ const dllConfig: Configuration = {
   },
   output: {
     path: LIBS_PATH,
-    filename: '[name].[hash:8].js',
+    filename: '[name].[contenthash:8].js',
     library: '[name]_library',
   },
   plugins: [
