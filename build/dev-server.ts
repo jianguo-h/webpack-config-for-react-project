@@ -4,10 +4,10 @@ import webpackDevConfig from './dev.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import open from 'open';
-import { DEV_PORT } from './constant';
 
 const app = express();
-const url = 'http://localhost:' + DEV_PORT;
+const port = 8080;
+const url = 'http://localhost:' + port;
 const compiler = webpack(webpackDevConfig);
 
 const devMiddlewareInstance = webpackDevMiddleware(compiler, {
@@ -33,4 +33,4 @@ devMiddlewareInstance.waitUntilValid(async () => {
   await open(url);
 });
 
-app.listen(DEV_PORT);
+app.listen(port);
