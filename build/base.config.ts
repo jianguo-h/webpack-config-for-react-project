@@ -52,6 +52,7 @@ const baseConfig: Configuration = {
       filename: 'index.html',
       minify: {
         removeComments: true,
+        removeEmptyAttributes: true,
       },
     }),
   ],
