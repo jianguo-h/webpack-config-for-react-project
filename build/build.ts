@@ -5,7 +5,7 @@ console.log('building for production...\n');
 webpack(webpackProdConfig, (errout, stats) => {
   if (errout) throw errout;
   process.stdout.write(
-    stats.toString({
+    stats?.toString({
       colors: true,
       modules: true,
       children: false,

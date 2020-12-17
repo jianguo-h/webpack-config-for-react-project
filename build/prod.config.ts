@@ -3,8 +3,8 @@ import webpackMerge from 'webpack-merge';
 import webpackBaseConfig from './base.config';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import TerserWebpackPlugin from 'terser-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   mode: 'production',
@@ -30,7 +30,7 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
     ],
   },
   plugins: [
-    new webpack.ProgressPlugin(),
+    new webpack.ProgressPlugin({}),
     // 每次打包前清除dist目录
     new CleanWebpackPlugin(),
     // 提取less和css
@@ -42,11 +42,11 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   optimization: {
     minimize: true,
     minimizer: [
-      new OptimizeCssAssetsPlugin({
-        cssProcessorOptions: {
-          map: false,
-        },
-        cssProcessorPluginOptions: {
+      new CssMinimizerPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false,
+        minimizerOptions: {
           preset: [
             'default',
             {
@@ -55,17 +55,15 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
             },
           ],
         },
-        canPrint: true,
       }),
       new TerserWebpackPlugin({
         parallel: true,
-        sourceMap: false,
         extractComments: false,
         terserOptions: {
           keep_fnames: false,
           keep_classnames: false,
+          sourceMap: false,
           compress: {
-            warnings: false,
             drop_console: true,
             drop_debugger: true,
             comparisons: false,

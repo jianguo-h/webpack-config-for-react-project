@@ -2,15 +2,6 @@ import webpack, { Configuration, Entry } from 'webpack';
 import webpackMerge from 'webpack-merge';
 import webpackBaseConfig from './base.config';
 
-const a = {
-  b_is: 1,
-  aIs: 2,
-};
-
-const a_b = 2;
-
-console.log(a, a_b);
-
 // config hot module
 const hots = [
   /* 'react-hot-loader/patch',  */ 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
