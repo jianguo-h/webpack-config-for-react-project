@@ -2,23 +2,38 @@ import webpack, { Configuration, Entry } from 'webpack';
 import webpackMerge from 'webpack-merge';
 import webpackBaseConfig from './base.config';
 
+const a = {
+  b_is: 1,
+  aIs: 2,
+};
+
+const a_b = 2;
+
+console.log(a, a_b);
+
 // config hot module
 const hots = [
   /* 'react-hot-loader/patch',  */ 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
 ];
-Object.keys(webpackBaseConfig.entry as Entry).forEach(entryName => {
-  if (webpackBaseConfig.entry) {
-    (webpackBaseConfig.entry as Entry)[entryName] = hots.concat(
-      (webpackBaseConfig.entry as Entry)[entryName]
+const baseConfigEntry = webpackBaseConfig.entry;
+const devConfigEntry: Entry = {};
+if (typeof baseConfigEntry === 'object' && !Array.isArray(baseConfigEntry)) {
+  Object.keys(baseConfigEntry).forEach(entryName => {
+    devConfigEntry[entryName] = hots.concat(
+      baseConfigEntry[entryName] as string
     );
-  }
-});
+  });
+}
 
 const devConfig: Configuration = webpackMerge(webpackBaseConfig, {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
   mode: 'development',
+  entry: devConfigEntry,
   output: {
-    filename: 'static/js/[name].[hash:8].js',
+    filename: 'static/js/[name].[fullhash:8].js',
+  },
+  stats: {
+    colors: true,
   },
   module: {
     rules: [

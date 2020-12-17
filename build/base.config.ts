@@ -63,7 +63,7 @@ const baseConfig: Configuration = {
   },
   optimization: {
     runtimeChunk: {
-      name: entrypoint => `runtime.${entrypoint.name}`,
+      name: (entrypoint: { name: string }) => `runtime.${entrypoint.name}`,
     },
     splitChunks: {
       chunks: 'all',
