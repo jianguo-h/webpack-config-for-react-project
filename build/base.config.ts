@@ -24,7 +24,12 @@ const baseConfig: Configuration = {
               cacheCompression: false,
             },
           },
-          'ts-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
         ],
       },
       {
