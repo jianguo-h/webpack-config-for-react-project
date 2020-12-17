@@ -8,4 +8,5 @@ module.exports = {
   // 缩进
   tabWidth: 2,
   jsxSingleQuote: true,
+  jsxBracketSameLine: true,
 };
