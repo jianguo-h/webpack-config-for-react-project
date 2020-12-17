@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import webpackDevConfig from './dev.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import connectHistory from 'connect-history-api-fallback';
 import open from 'open';
 
 const app = express();
@@ -23,6 +24,8 @@ const hotMiddlewareInstance = webpackHotMiddleware(compiler);
     });
   });
 }); */
+
+app.use(connectHistory());
 
 // use middleware
 app.use(devMiddlewareInstance);
