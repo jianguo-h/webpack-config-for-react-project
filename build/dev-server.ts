@@ -11,10 +11,7 @@ const port = 8080;
 const url = 'http://localhost:' + port;
 const compiler = webpack(webpackDevConfig);
 
-const devMiddlewareInstance = webpackDevMiddleware(compiler, {
-  publicPath: webpackDevConfig.output?.publicPath ?? '/',
-  stats: { colors: true },
-});
+const devMiddlewareInstance = webpackDevMiddleware(compiler);
 const hotMiddlewareInstance = webpackHotMiddleware(compiler);
 
 /* compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
