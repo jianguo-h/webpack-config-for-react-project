@@ -1,6 +1,7 @@
 import webpack, { Configuration, Entry } from 'webpack';
 import webpackMerge from 'webpack-merge';
 import webpackBaseConfig from './base.config';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 // config hot module
 const hots = [
@@ -38,7 +39,10 @@ const devConfig: Configuration = webpackMerge(webpackBaseConfig, {
       },
     ],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new ForkTsCheckerWebpackPlugin(),
+  ],
 });
 
 export default devConfig;
