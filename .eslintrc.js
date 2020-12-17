@@ -32,15 +32,32 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/no-empty-interface': 'error',
     '@typescript-eslint/no-inferrable-types': [
       'error',
       {
         ignoreParameters: true,
       },
     ],
-    '@typescript-eslint/camelcase': [
+    '@typescript-eslint/naming-convention': [
       'error',
-      { properties: 'never', ignoreDestructuring: true },
+      {
+        selector: 'property',
+        format: ['strictCamelCase', 'snake_case'],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
+      },
+      {
+        selector: 'typeLike',
+        format: ['strictCamelCase', 'UPPER_CASE'],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
+      },
+      {
+        selector: 'variable',
+        modifiers: ['destructured'],
+        format: null,
+      },
     ],
   },
   overrides: [
