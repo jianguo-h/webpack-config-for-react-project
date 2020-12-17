@@ -1,10 +1,10 @@
-import { Configuration } from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import webpackMerge from 'webpack-merge';
 import webpackBaseConfig from './base.config';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import TerserWebpackPlugin from 'terser-webpack-plugin';
 
 const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   mode: 'production',
@@ -30,6 +30,7 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
     ],
   },
   plugins: [
+    new webpack.ProgressPlugin(),
     // 每次打包前清除dist目录
     new CleanWebpackPlugin(),
     // 提取less和css
@@ -37,32 +38,46 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
       filename: 'static/css/[name].[contenthash:8].css',
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
     }),
-    // 压缩css
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessorOptions: {
-        discardComments: {
-          removeAll: true,
-        },
-      },
-      canPrint: true,
-    }),
-    // 压缩混淆js
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        warnings: false, // 删除警告
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-        },
-        output: {
-          comments: false, // 去除注释
-        },
-      },
-      cache: true, // 使用缓存
-      parallel: true, // 开启多线程压缩
-    }),
   ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new OptimizeCssAssetsPlugin({
+        cssProcessorOptions: {
+          map: false,
+        },
+        cssProcessorPluginOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true },
+              minifyFontValues: { removeQuotes: false },
+            },
+          ],
+        },
+        canPrint: true,
+      }),
+      new TerserWebpackPlugin({
+        parallel: true,
+        sourceMap: false,
+        extractComments: false,
+        terserOptions: {
+          keep_fnames: false,
+          keep_classnames: false,
+          compress: {
+            warnings: false,
+            drop_console: true,
+            drop_debugger: true,
+            comparisons: false,
+          },
+          output: {
+            ascii_only: true,
+            comments: false,
+          },
+        },
+      }),
+    ],
+  },
 });
 
 export default webpackProdConfig;

@@ -14,22 +14,31 @@ const baseConfig: Configuration = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: ['babel-loader', 'ts-loader'],
+        test: /\.(js|ts)x?$/,
         exclude: /node_modules/,
-      },
-      {
-        test: /\.jsx?$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.(png|jpg|gif|svg|ttf|eot|woff|otf)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'babel-loader',
             options: {
-              name: 'static/images/[name].[hash:7].[ext]',
+              cacheDirectory: true,
+              cacheCompression: false,
+            },
+          },
+          'ts-loader',
+        ],
+      },
+      {
+        exclude: [
+          /\.(js|mjs|jsx|ts|tsx)$/,
+          /\.html$/,
+          /\.json$/,
+          /\.(css|sass|scss|less)$/,
+        ],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
             },
           },
         ],
@@ -47,35 +56,18 @@ const baseConfig: Configuration = {
     }),
   ],
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       '@src': path.resolve(__dirname, '../src'),
     },
   },
   optimization: {
-    runtimeChunk: 'single',
+    runtimeChunk: {
+      name: entrypoint => `runtime.${entrypoint.name}`,
+    },
     splitChunks: {
-      cacheGroups: {
-        vendors: {
-          name: 'vendors',
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all',
-          priority: -10,
-          reuseExistingChunk: true,
-        },
-        commons: {
-          name: 'commons',
-          chunks: 'all',
-          minChunks: 2,
-          priority: -11,
-        },
-        /*styles: {
-          name: 'styles',
-          test: /\.(css|less)$/,
-          chunks: 'all',
-          enforce: true
-        }*/
-      },
+      chunks: 'all',
+      name: false,
     },
   },
 };
