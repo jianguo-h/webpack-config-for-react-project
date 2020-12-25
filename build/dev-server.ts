@@ -14,14 +14,6 @@ const compiler = webpack(webpackDevConfig);
 const devMiddlewareInstance = webpackDevMiddleware(compiler);
 const hotMiddlewareInstance = webpackHotMiddleware(compiler);
 
-/* compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
-  compilation.hooks.htmlWebpackPluginAfterEmit.tap('HtmlWebpackPlugin', () => {
-    hotMiddlewareInstance.publish({
-      action: 'reload'
-    });
-  });
-}); */
-
 app.use(connectHistory());
 
 // use middleware

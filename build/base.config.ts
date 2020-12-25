@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const baseConfig: Configuration = {
   entry: {
@@ -33,6 +38,23 @@ const baseConfig: Configuration = {
         ],
       },
       {
+        test: /.less$/,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'less-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
+      },
+      {
         exclude: [
           /\.(js|mjs|jsx|ts|tsx)$/,
           /\.html$/,
@@ -55,11 +77,22 @@ const baseConfig: Configuration = {
       inject: true,
       template: path.resolve(__dirname, '../src/index.html'),
       filename: 'index.html',
-      minify: {
-        removeComments: true,
-        removeEmptyAttributes: true,
-      },
+      minify: isProduction
+        ? {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+          }
+        : undefined,
     }),
+    new ForkTsCheckerWebpackPlugin(),
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
