@@ -12,23 +12,6 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   output: {
     filename: 'static/js/[name].[contenthash:8].js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'less-loader',
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'postcss-loader', 'less-loader'],
-      },
-    ],
-  },
   plugins: [
     new webpack.ProgressPlugin({}),
     // 每次打包前清除dist目录

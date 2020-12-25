@@ -1,11 +1,10 @@
 import webpack, { Configuration, Entry } from 'webpack';
 import webpackMerge from 'webpack-merge';
 import webpackBaseConfig from './base.config';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 // config hot module
 const hots = [
-  /* 'react-hot-loader/patch',  */ 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+  /* 'react-hot-loader/patch',  */ 'webpack-hot-middleware/client?path=/__webpack_hmr&overlay=true&reload=true',
 ];
 const baseConfigEntry = webpackBaseConfig.entry;
 const devConfigEntry: Entry = {};
@@ -25,24 +24,14 @@ const devConfig: Configuration = webpackMerge(webpackBaseConfig, {
     filename: 'static/js/[name].[fullhash:8].js',
   },
   stats: {
+    errors: true,
+    errorDetails: true,
+    warnings: true,
     colors: true,
+    timings: true,
+    all: false,
   },
-  module: {
-    rules: [
-      {
-        test: /.less$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
-    ],
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new ForkTsCheckerWebpackPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });
 
 export default devConfig;
