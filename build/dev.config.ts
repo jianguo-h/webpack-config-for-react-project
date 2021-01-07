@@ -1,6 +1,7 @@
-import webpack, { Configuration } from 'webpack';
+import { Configuration } from 'webpack';
 import webpackMerge from 'webpack-merge';
 import webpackBaseConfig from './base.config';
+import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 
 const devConfig: Configuration = webpackMerge(webpackBaseConfig, {
   devtool: 'eval-cheap-module-source-map',
@@ -8,7 +9,11 @@ const devConfig: Configuration = webpackMerge(webpackBaseConfig, {
   output: {
     filename: 'static/js/[name].[fullhash:8].js',
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new ESLintWebpackPlugin({
+      extensions: ['js', 'jsx', 'ts', 'tsx'],
+    }),
+  ],
 });
 
 export default devConfig;
