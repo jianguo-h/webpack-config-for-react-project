@@ -63,8 +63,9 @@ const baseConfig: Configuration = {
         ],
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
+              limit: 1024 * 8,
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
