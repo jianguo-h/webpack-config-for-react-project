@@ -28,6 +28,7 @@ const baseConfig: Configuration = {
             options: {
               cacheDirectory: true,
               cacheCompression: false,
+              sourceMaps: !isProduction,
             },
           },
           {
@@ -46,6 +47,7 @@ const baseConfig: Configuration = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
+              sourceMaps: !isProduction,
             },
           },
           'postcss-loader',
@@ -60,6 +62,7 @@ const baseConfig: Configuration = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
+              sourceMaps: !isProduction,
             },
           },
           'postcss-loader',
