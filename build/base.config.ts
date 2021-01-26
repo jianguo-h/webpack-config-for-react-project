@@ -6,6 +6,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const isProduction = process.env.NODE_ENV === 'production';
+const styleLoader = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 const baseConfig: Configuration = {
   entry: {
@@ -40,8 +41,13 @@ const baseConfig: Configuration = {
       {
         test: /.less$/,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
+          styleLoader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
           'less-loader',
         ],
@@ -49,8 +55,13 @@ const baseConfig: Configuration = {
       {
         test: /\.css$/,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
+          styleLoader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
           'postcss-loader',
         ],
       },
@@ -102,9 +113,7 @@ const baseConfig: Configuration = {
     },
   },
   optimization: {
-    runtimeChunk: {
-      name: (entrypoint: { name: string }) => `runtime.${entrypoint.name}`,
-    },
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
       name: false,

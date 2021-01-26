@@ -12,6 +12,8 @@ const devConfig: Configuration = webpackMerge(webpackBaseConfig, {
   plugins: [
     new ESLintWebpackPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx'],
+      emitWarning: true,
+      emitError: true,
     }),
   ],
 });
