@@ -47,7 +47,7 @@ const baseConfig: Configuration = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              sourceMaps: !isProduction,
+              sourceMap: !isProduction,
             },
           },
           'postcss-loader',
@@ -62,7 +62,7 @@ const baseConfig: Configuration = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              sourceMaps: !isProduction,
+              sourceMap: !isProduction,
             },
           },
           'postcss-loader',
