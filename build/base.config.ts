@@ -6,7 +6,34 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const isProduction = process.env.NODE_ENV === 'production';
-const styleLoader = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
+
+const getStyleLoaders = (isCssModules?: boolean, isLess?: boolean) => {
+  const loaders = [
+    isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: isLess ? 2 : 1,
+        sourceMap: !isProduction,
+        modules: isCssModules
+          ? {
+              compileType: 'module',
+              mode: 'local',
+              auto: true,
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+              localIdentContext: path.resolve(__dirname, '../src'),
+              exportLocalsConvention: 'camelCaseOnly',
+            }
+          : undefined,
+      },
+    },
+    'postcss-loader',
+  ];
+  if (isLess) {
+    loaders.push('less-loader');
+  }
+  return loaders;
+};
 
 const baseConfig: Configuration = {
   entry: {
@@ -20,7 +47,7 @@ const baseConfig: Configuration = {
   module: {
     rules: [
       {
-        test: /\.(js|ts)x?$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         use: [
           {
@@ -41,32 +68,22 @@ const baseConfig: Configuration = {
       },
       {
         test: /.less$/,
-        use: [
-          styleLoader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              sourceMap: !isProduction,
-            },
-          },
-          'postcss-loader',
-          'less-loader',
-        ],
+        exclude: /\.module\.less$/,
+        sideEffects: true,
+        use: getStyleLoaders(false, true),
+      },
+      {
+        test: /\.module\.less$/,
+        use: getStyleLoaders(true, true),
       },
       {
         test: /\.css$/,
-        use: [
-          styleLoader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              sourceMap: !isProduction,
-            },
-          },
-          'postcss-loader',
-        ],
+        sideEffects: true,
+        use: getStyleLoaders(),
+      },
+      {
+        test: /\.module\.css$/,
+        use: getStyleLoaders(true),
       },
       {
         exclude: [
