@@ -41,22 +41,46 @@ module.exports = {
     '@typescript-eslint/naming-convention': [
       'error',
       {
-        selector: 'property',
-        format: ['strictCamelCase', 'snake_case'],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'allow',
+        selector: 'interface',
+        format: ['StrictPascalCase'],
+        prefix: ['I'],
+        leadingUnderscore: 'forbid',
+        trailingUnderscore: 'forbid',
       },
       {
         selector: 'typeLike',
-        format: ['strictCamelCase', 'UPPER_CASE'],
+        format: ['StrictPascalCase'],
+        leadingUnderscore: 'forbid',
+        trailingUnderscore: 'forbid',
+      },
+      {
+        selector: 'property',
+        format: ['strictCamelCase', 'snake_case', 'StrictPascalCase'],
         leadingUnderscore: 'allow',
         trailingUnderscore: 'allow',
       },
       {
-        selector: 'variable',
-        modifiers: ['destructured'],
-        format: null,
+        selector: 'variableLike',
+        format: [
+          'strictCamelCase',
+          'snake_case',
+          'StrictPascalCase',
+          'UPPER_CASE',
+        ],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
       },
+      /* {
+        selector: 'default',
+        format: [
+          'strictCamelCase',
+          'snake_case',
+          'UPPER_CASE',
+          'StrictPascalCase',
+        ],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
+      }, */
     ],
   },
   overrides: [
