@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles/app.module.less';
+import { hot } from 'react-hot-loader/root';
 
 console.log(styles);
 
@@ -11,4 +12,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(App);

@@ -124,11 +124,17 @@ const baseConfig: Configuration = {
           }
         : undefined,
     }),
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      async: true,
+      typescript: {
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
+      },
+    }),
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
+      'react-dom': '@hot-loader/react-dom',
       '@src': path.resolve(__dirname, '../src'),
     },
   },

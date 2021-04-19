@@ -11,10 +11,12 @@ const options: WebpackDevServer.Configuration = {
   stats: {
     errors: true,
     errorDetails: true,
+    errorStack: true,
     warnings: true,
     colors: true,
-    timings: true,
-    all: false,
+    assets: false,
+    chunks: false,
+    modules: false,
   },
   overlay: {
     warnings: false,
