@@ -24,10 +24,11 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        // cache: true,
         parallel: true,
-        // sourceMap: false,
         minimizerOptions: {
+          processorOptions: {
+            map: false,
+          },
           preset: [
             'default',
             {

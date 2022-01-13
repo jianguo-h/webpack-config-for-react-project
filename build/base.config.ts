@@ -17,12 +17,12 @@ const getStyleLoaders = (isCssModules?: boolean, isLess?: boolean) => {
         sourceMap: !isProduction,
         modules: isCssModules
           ? {
-              compileType: 'module',
               mode: 'local',
               auto: true,
               localIdentName: '[name]__[local]--[hash:base64:5]',
               localIdentContext: path.resolve(__dirname, '../src'),
               exportLocalsConvention: 'camelCaseOnly',
+              exportGlobals: true,
             }
           : undefined,
       },
