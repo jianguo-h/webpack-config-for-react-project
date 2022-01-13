@@ -20,6 +20,7 @@ const compiler = webpack(webpackDevConfig);
 let port = 8080;
 
 async function startDevServer() {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const _port = await detectPort(port);
   if (_port === port) {
     options.port = port;

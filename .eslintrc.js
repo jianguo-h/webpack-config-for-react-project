@@ -10,7 +10,7 @@ module.exports = {
   plugins: ['react', 'react-hooks'],
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 2019,
+    ecmaVersion: 2021,
     ecmaFeatures: {
       jsx: true,
     },
@@ -49,38 +49,21 @@ module.exports = {
       },
       {
         selector: 'typeLike',
-        format: ['StrictPascalCase'],
+        format: ['PascalCase', 'StrictPascalCase'],
         leadingUnderscore: 'forbid',
         trailingUnderscore: 'forbid',
       },
       {
-        selector: 'property',
-        format: ['strictCamelCase', 'snake_case', 'StrictPascalCase'],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'allow',
-      },
-      {
-        selector: 'variableLike',
-        format: [
-          'strictCamelCase',
-          'snake_case',
-          'StrictPascalCase',
-          'UPPER_CASE',
-        ],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'allow',
-      },
-      /* {
         selector: 'default',
         format: [
           'strictCamelCase',
           'snake_case',
-          'UPPER_CASE',
           'StrictPascalCase',
+          'UPPER_CASE',
         ],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'allow',
-      }, */
+        leadingUnderscore: 'forbid',
+        trailingUnderscore: 'forbid',
+      },
     ],
   },
   overrides: [
