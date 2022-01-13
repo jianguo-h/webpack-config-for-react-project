@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.tsx",
   "scripts": {
+    "prepare": "husky install",
     "start": "env-cmd ts-node build/dev-server.ts",
     "build": "env-cmd -f .env.production ts-node build/build.ts",
     "lint": "npm run prettier && npm run lint-script && npm run lint-style",
