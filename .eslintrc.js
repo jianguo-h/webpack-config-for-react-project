@@ -27,6 +27,7 @@ module.exports = {
     },
   },
   rules: {
+    curly: 'error',
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
