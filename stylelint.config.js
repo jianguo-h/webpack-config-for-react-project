@@ -1,7 +1,5 @@
 module.exports = {
-  customSyntax: 'postcss-less',
   extends: ['stylelint-config-standard', 'stylelint-prettier/recommended'],
-  plugins: ['stylelint-less'],
   rules: {
     'keyframes-name-pattern': null,
     'comment-empty-line-before': 'always',
@@ -12,7 +10,8 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.module.less'],
+      files: ['**/*.less'],
+      customSyntax: 'postcss-less',
       rules: {
         'selector-class-pattern': null,
       },
