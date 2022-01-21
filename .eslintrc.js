@@ -4,10 +4,11 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
     'prettier',
     'plugin:prettier/recommended',
   ],
-  plugins: ['react', 'react-hooks'],
+  plugins: ['react'],
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2021,
